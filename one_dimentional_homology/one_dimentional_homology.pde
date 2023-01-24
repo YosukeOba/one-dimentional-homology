@@ -1,5 +1,5 @@
 //課題7-2は"72.txt"，課題7-3は"73.txt"
-String filename = "74.txt";
+String filename = "78.txt";
 
 //頂点の種類を確認するためのArrayList
 ArrayList<Integer> V = new ArrayList<Integer>();
@@ -67,7 +67,9 @@ void setup() {
     }
   }
 
-  for (int i = 0; i < V.size()-1; i++) {
+  for (int i = 0; i < V.size(); i++) {
+    
+    println("i="+i);
 
     if (i >= E.size()) {
       break;
@@ -75,30 +77,38 @@ void setup() {
 
     int count = 1;
     boolean kakunin = false;
-    while (true) {
+    while (kakunin == false) {
       boolean check = true;
 
       //ここに行基本変形をやるのを書く
+      println(matrix[i][i]);
 
       if (matrix[i][i] == 1) {
+        //print("1");
         for (int j = 0; j < V.size(); j++) {
-          if (matrix[j][i] == 1 && j != i) {
+          if (matrix[j][i] >= 1 && j != i) {
+            int temppp = matrix[j][i];
             for (int k = 0; k < E.size(); k++) {
-              matrix[j][k] = matrix[j][k] - matrix[i][k];
+              matrix[j][k] = matrix[j][k] - abs(temppp)*matrix[i][k];
             }
-          } else if (matrix[j][i] == -1) {
+          } else if (matrix[j][i] <= -1 && j != i) {
+            int temppp = matrix[j][i];
             for (int k = 0; k < E.size(); k++) {
-              matrix[j][k] = matrix[j][k] + matrix[i][k];
+              matrix[j][k] = matrix[j][k] + abs(temppp)*matrix[i][k];
             }
           }
         }
       } else if (matrix[i][i] == -1) {
+        //print("-1");
         for (int k = 0; k < E.size(); k++) {
           matrix[i][k] = -matrix[i][k];
         }
-      } else if (matrix[i][i] == 0) {
+      } else {
+        // if (matrix[i][i] == 0)
+        //print("0");
         //println(matrix[i][i]);
-        println(i + "," + count);
+        //println(i + "," + count);
+        println(kakunin);
         if (i+count >= E.size()) {
           kakunin = true;
         }
@@ -109,8 +119,6 @@ void setup() {
             matrix[l][i+count] = temp;
           }
           count++;
-        }
-        if (kakunin == true) {
           for (int l = V.size()-1; l > i; l--) {
             if (matrix[l][i] == -1 || matrix[l][i] == 1) {
               for (int k = 0; k < E.size(); k++) {
@@ -120,6 +128,7 @@ void setup() {
             }
           }
         }
+          
       }
 
       //その列が完了してるかチェック
@@ -138,11 +147,14 @@ void setup() {
         //行列が正しくできてるか確認用
         println();
         for (int n = 0; n < E.size(); n++) {
+          if(n<10) print(" ");
+          print(n+":");
           for (int m = 0; m < V.size(); m++) {
+            if(matrix[m][n] >= 0) print(" ");
             if (m == V.size()-1) {
               println(matrix[m][n]);
             } else {
-              print(matrix[m][n]);
+              print(matrix[m][n]+",");
             }
           }
         }
@@ -154,6 +166,7 @@ void setup() {
   //行列が正しくできてるか確認用
   println();
   for (int i = 0; i < E.size(); i++) {
+    print(i+":");
     for (int j = 0; j < V.size(); j++) {
       if (j == V.size()-1) {
         println(matrix[j][i]);
