@@ -121,8 +121,17 @@ void setup() {
           count++;
           for (int l = V.size()-1; l > i; l--) {
             if (matrix[l][i] == -1 || matrix[l][i] == 1) {
+              if(matrix[i][i] == 0){
               for (int k = 0; k < E.size(); k++) {
                 matrix[i][k] = matrix[i][k] + matrix[l][k];
+              }
+              } else {
+                int temprr = matrix[i][i];
+                int tempaa = matrix[l][i];
+                int aaaaa = tempaa-temprr;
+                for (int k = 0; k < E.size(); k++) {
+                matrix[i][k] = matrix[i][k] + aaaaa*matrix[l][k];
+              }
               }
               break;
             }
