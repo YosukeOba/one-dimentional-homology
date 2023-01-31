@@ -1,7 +1,7 @@
 //授業で取り扱ったベンツのような形（輪が3つ）は"74.txt"，メガネのような形（輪が２つ）は"75.txt"，課題7-2（輪が０個）は"72.txt"，課題7-3（輪が０個）は"73.txt"
 //配布資料のreportで生成した辺のデータをtxtファイルに貼り付けて，dataフォルダに入れることで動きます
 //行列計算の過程がアニメーション的に見れます，ゆっくり見たい場合はsetup()内のframeRateの値を調整してください
-String filename = "74.txt";
+String filename = "76.txt";
 
 //頂点の種類を確認するためのArrayList
 ArrayList<Integer> V = new ArrayList<Integer>();
